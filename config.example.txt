@@ -1,6 +1,6 @@
-Problem	Part	Question
-1	_	How do you use this damn thing?
-1	A	Do you know the muffin man?
-1	B	Shouldn't you be doing homework right now?
-2	_	Compute the integral of the Moon gravitational forcefield given a complete orbital rotation
-3	_	Isn't Math fun?
+Section	Problem	Part	Question
+2	1	_	How do you use this damn thing?
+2	1	A	Do you know the muffin man?
+2	1	B	Shouldn't you be doing homework right now?
+2	2	_	Compute the integral of the Moon gravitational forcefield given a complete orbital rotation
+2	3	_	Isn't Math fun?

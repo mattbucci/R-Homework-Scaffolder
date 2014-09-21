@@ -38,28 +38,56 @@
 		return(function_list)
 	}
 
-
-
-
-
 # Scaffolder 
 
+	# Create a Directory, if already created ignore
 	generateDirectory <- function(mainDir, subDir) {
 		dir.create(file.path(mainDir, subDir), showWarnings = FALSE)
 	}
 
+	# Take Problem in the config format and apply proper formatting
+	problemToText <- function(problem) {
 
-	generateSection <- function(mainDir, subDir) {
-		dir.create(file.path(mainDir, subDir), showWarnings = FALSE)
 	}
 
-	generateSummary <- function(mainDir, subDir) {
-		dir.create(file.path(mainDir, subDir), showWarnings = FALSE)
+	generateSection <- function(sectionName, Problems) {
+		
+		fileName = cat("Section_",sectionName, ".R")
+		fileConn = file(fileName)
+
+		# Assumes Section Problems are pre sorted, if you enter the problems backwards, that's your issue
+		for (i in 1:length(Problems)) {
+			text = problemToText(Problems[i,])
+			writeLines(text,fileConn)
+		}
+
+		close(fileConn)
+
+	}
+
+	generateSummary <- function(config) {
+		
+		# RunAll.R
+		# Display All Sections
+		# Run All Sections
 	}
 
 	# This is the main generation function, given a correctly formatted config.txt file it can scaffold your entire project
 	generateFromFile <- function(fileName = "config.txt") {
 
 		config <- read.csv(fileName, sep="\t")
+
+		# We'll need a place for all those great data sets
+		generateDirectory(this.dir,"data")
+
+		Sections <- unique(config$Section)
+
+		# Fuck yea, functional programming
+		lapply(Sections, function(x){generateSection(x,config[which(config$Section==x),-1])})
+
+
+		generateSummary(config)
+		
+
 
 	}
