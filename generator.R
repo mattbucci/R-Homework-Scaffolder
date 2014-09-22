@@ -14,13 +14,34 @@
 		dir.create(file.path(mainDir, subDir), showWarnings = FALSE)
 	}
 
+	# Part to text
+	partToText <- function(part) {
+		print(part$Part)
+		if (part$Part == "_") {
+			return(paste("\tpp(\"", part$Question, "\", \"heading\")", sep=""))
+		} else {
+			return(paste("\t\tpp(\"Part ",part$Part,") ", part$Question,"\",sep=\"\")", sep=""))
+		}
+	}
+
 	# Take Problem in the config format and apply proper formatting
 	problemToText <- function(problem) {
-		if (problem$Part == "_") {
-			return(paste("pp(\"", problem$Question, "\", \"heading\")", sep=""))
-		} else {
-			return(paste("pp(paste(\"Part \",\"", problem$Part, "\", \") \",\"", problem$Question,"\",sep=\"\"))", sep=""))
+		
+		output = list()
+
+		for (i in 1:length(problem[,1])) {
+			part = problem[i,]
+
+			if (part$Part == "_") {
+				output[[length(output)+1]] = paste("Section_",part$Section,"_Problem_",part$Problem," <- function() {",sep="")
+			}
+
+			output[[length(output)+1]] = partToText(part)
 		}
+
+		output[[length(output)+1]] = "}\n"
+
+		return(output)
 	}
 
 	generateSection <- function(sectionName, Problems) {
@@ -31,11 +52,13 @@
 
 		text = list()
 		# Assumes Section Problems are pre sorted, if you enter the problems backwards, that's your issue
-		for (i in 1:length(Problems[,1])) {
-			problemtext = problemToText(Problems[i,])
+		for (i in 1:length(unique(Problems$Problem))) {
+			Problem = Problems[which(Problems$Problem == unique(Problems$Problem)[i]),]
+			problemtext = problemToText(Problem)
 			text[[i]] = problemtext
 		}
 
+		
 
 		writeLines(unlist(text),fileConn)
 		close(fileConn)
@@ -60,7 +83,7 @@
 		Sections <- unique(config$Section)
 
 		# Fuck yea, functional programming
-		lapply(Sections, function(x){generateSection(x,config[which(config$Section==x),-1])})
+		lapply(Sections, function(x){generateSection(x,config[which(config$Section==x),])})
 
 
 		generateSummary(config)
