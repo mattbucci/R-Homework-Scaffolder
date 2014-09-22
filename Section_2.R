@@ -1,0 +1,5 @@
+pp("How do you use this damn thing?", "heading")
+pp(paste("Part ","A", ") ","Do you know the muffin man?",sep=""))
+pp(paste("Part ","B", ") ","Shouldn't you be doing homework right now?",sep=""))
+pp("Compute the integral of the Moon gravitational forcefield given a complete orbital rotation", "heading")
+pp("Isn't Math fun?", "heading")
