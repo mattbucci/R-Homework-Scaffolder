@@ -1,5 +1,8 @@
 # Magic - There be Dragons Here
 
+	# Clear all memory
+	rm(list=ls())
+
 	# Set Working Directory to current file location
 	this.dir <- dirname(parent.frame(2)$ofile) 
 	setwd(this.dir) 
@@ -20,7 +23,7 @@
 		if (part$Part == "_") {
 			return(paste("\tpp(\"", part$Question, "\", \"heading\")", sep=""))
 		} else {
-			return(paste("\t\tpp(\"Part ",part$Part,") ", part$Question,"\",sep=\"\")", sep=""))
+			return(paste("\t\tpp(\"Part ",part$Part,") ", part$Question,"\")", sep=""))
 		}
 	}
 
@@ -57,8 +60,6 @@
 			problemtext = problemToText(Problem)
 			text[[i]] = problemtext
 		}
-
-		
 
 		writeLines(unlist(text),fileConn)
 		close(fileConn)

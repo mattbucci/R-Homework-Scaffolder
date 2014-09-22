@@ -1,7 +1,7 @@
 Section_2_Problem_1 <- function() {
 	pp("How do you use this damn thing?", "heading")
-		pp("Part A) Do you know the muffin man?",sep="")
-		pp("Part B) Shouldn't you be doing homework right now?",sep="")
+		pp("Part A) Do you know the muffin man?")
+		pp("Part B) Shouldn't you be doing homework right now?")
 }
 
 Section_2_Problem_2 <- function() {
