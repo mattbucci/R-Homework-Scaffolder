@@ -19,11 +19,10 @@
 
 	# Part to text
 	partToText <- function(part) {
-		print(part$Part)
 		if (part$Part == "_") {
 			return(paste("\tpp(\"", part$Question, "\", \"heading\")", sep=""))
 		} else {
-			return(paste("\t\tpp(\"Part ",part$Part,") ", part$Question,"\")", sep=""))
+			return(paste("\t\tpp(\"Part ",part$Part,") ", part$Question,"\",type=\"heading\")", sep=""))
 		}
 	}
 
@@ -40,6 +39,7 @@
 			}
 
 			output[[length(output)+1]] = partToText(part)
+			output[[length(output)+1]] = "\t\t pp(\"Answer: \")"
 		}
 
 		output[[length(output)+1]] = "}\n"
