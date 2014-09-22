@@ -52,13 +52,16 @@
 		fileName = paste("Section_", sectionName, ".R", sep="")
 		fileConn = file(fileName)
 
-
 		text = list()
+
+		# Add in our utils
+		text[[length(text)+1]] = "source(\"util.r\")\n"
+
 		# Assumes Section Problems are pre sorted, if you enter the problems backwards, that's your issue
 		for (i in 1:length(unique(Problems$Problem))) {
 			Problem = Problems[which(Problems$Problem == unique(Problems$Problem)[i]),]
 			problemtext = problemToText(Problem)
-			text[[i]] = problemtext
+			text[[length(text)+1]] = problemtext
 		}
 
 		writeLines(unlist(text),fileConn)
@@ -88,7 +91,5 @@
 
 
 		generateSummary(config)
-		
-
 
 	}

@@ -1,3 +1,5 @@
+source("util.r")
+
 Section_2_Problem_1 <- function() {
 	pp("How do you use this damn thing?", "heading")
 		pp("Part A) Do you know the muffin man?")
