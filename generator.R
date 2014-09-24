@@ -39,7 +39,7 @@
 			}
 
 			output[[length(output)+1]] = partToText(part)
-			output[[length(output)+1]] = "\t\t pp(\"Answer: \")"
+			output[[length(output)+1]] = "\t\tpp(\"Answer: \")\n"
 		}
 
 		output[[length(output)+1]] = "}\n"
